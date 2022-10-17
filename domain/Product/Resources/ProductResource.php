@@ -18,7 +18,12 @@ class ProductResource extends JsonResource
             'sku' => $this->sku,
             'name' => $this->name,
             'category' => $this->category,
-            'price' => $this->price,
+            'price' => [
+                'original' => $this->price,
+                'final' => $this->discount_percentage ? $this->discount_percentage * $this->price / 100 : $this->price,
+                'discount_percentage' => $this->discount_percentage ? $this->discount_percentage . "%" : null,
+                'currency' => $this->currency,
+            ],
         ];
     }
 }
