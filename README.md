@@ -1,5 +1,35 @@
 # api-requirements
 
+
+## Installation & Usage
+After cloning, run:
+```
+composer install
+cp .env.example .env
+php artisan key:generate
+```
+
+Then setup the database in the .env
+```
+DB_CONNECTION=sqlite
+DB_DATABASE=database.sqlite
+```
+And, run:
+```
+php artisan migrate --seed
+php artisan serve
+```
+
+
+## API Call
+```
+/api/products
+/api/products?category=insurance
+/api/products?price=89000
+/api/products?minPrice=20000&maxPrice=100000
+```
+
+
 ## Description
 We want you to implement a REST API endpoint that given a list of products, applies some
 discounts to them and can be filtered.
