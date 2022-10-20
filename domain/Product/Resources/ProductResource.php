@@ -2,6 +2,7 @@
 
 namespace Domain\Product\Resources;
 
+use Domain\Product\ValueObjects\Price;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
@@ -18,12 +19,7 @@ class ProductResource extends JsonResource
             'sku' => $this->sku,
             'name' => $this->name,
             'category' => $this->category,
-            'price' => [
-                'original' => $this->price,
-                'final' => $this->discount_percentage ? $this->price - $this->discount_percentage * $this->price / 100 : $this->price,
-                'discount_percentage' => $this->discount_percentage ? $this->discount_percentage . "%" : null,
-                'currency' => $this->currency,
-            ],
+            'price' => new Price($this->price, $this->currency, $this->discount_percentage),
         ];
     }
 }
