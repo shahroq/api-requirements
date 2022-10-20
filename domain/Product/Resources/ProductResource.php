@@ -20,7 +20,7 @@ class ProductResource extends JsonResource
             'category' => $this->category,
             'price' => [
                 'original' => $this->price,
-                'final' => $this->discount_percentage ? $this->discount_percentage * $this->price / 100 : $this->price,
+                'final' => $this->discount_percentage ? $this->price - $this->discount_percentage * $this->price / 100 : $this->price,
                 'discount_percentage' => $this->discount_percentage ? $this->discount_percentage . "%" : null,
                 'currency' => $this->currency,
             ],
